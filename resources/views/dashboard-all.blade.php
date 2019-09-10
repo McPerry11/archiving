@@ -15,7 +15,7 @@
     <div id="admin" class="col s12">
       <div class="card material-table">
         <div class="table-header">
-          <span class="table-title">All Researches</span>
+          <span class="table-title"><b>All Researches</b></span>
           <div class="actions">
             @if(Auth::user()->isSuperAdmin)
               {{-- <a title="Download as PDF" class="generate-pdf modal-trigger waves-effect btn-flat nopadding"><i class="material-icons left">insert_drive_file</i>PDF</a> --}}
@@ -33,17 +33,17 @@
           </form>
           <form action="{{ url('excel') }}" method="POST" target="_blank">
             @csrf
-            <input type="hidden" name="excel_data">
+            <input type="hidden" name="excel_data"> 
           </form>
         </div>
         <table id="datatable" data-filter="0,1,2">
           <thead>
             <tr>
-              <th width="5%">College</th>
-              <th>Title</th>
-              <th width="20%">Authors</th>
+              <th width="15%"><b>College</b></th>
+              <th><b>Title</b></th>
+              <th width="20%"><b>Authors</b></th>
               <th>Keywords</th>
-              <th width="15%">Category</th>
+              <th width="15%"><b>Category</b></th>
               <th>Publisher</th>
               <th>Proceeding Date</th>
               <th>Presentation Date</th>
@@ -51,14 +51,14 @@
               <th>Note</th>
               <th>Conference Name</th>
               <th>URL</th>
-              <th width="10%">Actions</th>
+              <th width="15%"><b>Actions</b></th>
             </tr>
           </thead>
           <tbody>
           </tbody>
         </table>
       </div>
-      <img src="{{ asset('img/logo/rnd.png') }}" style="float:right" alt="" height="40px">
+      <img src="{{ asset('img/logo/rnd.png') }}" style="position:absolute;right:10px;bottom:10px" alt="" height="40px">
     </div>
   </div>
 @endsection

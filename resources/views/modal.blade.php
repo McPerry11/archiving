@@ -1,7 +1,12 @@
+<!-- Look for this line (yung nasa baba) para sa pag edit ng view: -->
+  <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
+
+  <!-- PDF From "View" form is carried on to the "Add" form -->
+
 <div id="viewModal" class="modal modal-fixed-footer">
   <form name="frmAdd">
     <div class="modal-content">
-      <h4>Add</h4>
+      <h4>View</h4>
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
           <div class="input-field col s12">
@@ -15,6 +20,7 @@
         @endif
         <div class="input-field col s12">
           <p class="caption">Title</p>
+          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="title" type="text" class="validate" placeholder="Enter the title" required disabled>
         </div>
         <div class="input-field col s12">
@@ -32,18 +38,22 @@
         </div>
         <div class="input-field col s12">
           <p class="caption">Publisher</p>
+          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="publisher" type="text" class="validate" placeholder="Enter the publisher" disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">Proceeding Date</p>
+          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="proceeding_date" type="text" class="validate" placeholder="Enter the proceeding date" disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">Presentation Date</p>
+          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="presentation_date" type="text" class="validate" placeholder="Enter the presentation date" disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">Publication Date</p>
+          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="publication_date" type="text" class="validate" placeholder="Enter the publication date" disabled>
         </div>
         <div class="input-field col s12">
@@ -52,10 +62,12 @@
         </div>
         <div class="input-field col s12">
           <p class="caption">Conference Name</p>
+          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="conference_name" type="text" class="validate" placeholder="Conference Name" disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">URL</p>
+          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="url" type="text" class="validate" placeholder="Website / URL" disabled>
         </div>
         <div class="input-field col s12">
@@ -69,6 +81,9 @@
     </div>
   </form>
 </div>
+
+
+
 <div id="addModal" class="modal modal-fixed-footer">
   <form name="frmAdd">
     <div class="modal-content">
@@ -98,11 +113,11 @@
           <div class="chips chips-placeholder" data-name="authors"></div>
         </div>
         <div class="input-field col s12">
-          <p class="caption">Keywords<i>(To add data, press enter)</i></p>
+          <p class="caption">Keywords <i>(To add data, press enter)</i></p>
           <div class="chips chips-placeholder" data-name="keywords"></div>
         </div>
         <div class="input-field col s12">
-          <p class="caption">Category<i>(To add data, press enter)</i></p>
+          <p class="caption">Category <i>(To add data, press enter)</i></p>
           <div class="chips chips-placeholder" data-name="category"></div>
         </div>
         <div class="input-field col s12">
@@ -144,6 +159,8 @@
         <input type="file" name="attachment_file" style="display:none">
       </div>
     </div>
+
+
     <div class="modal-footer">
       <button type="button" class="modal-close waves-effect waves-green btn-flat">Close</button>
       <button type="submit" class="waves-effect waves-green btn-flat">Add</button>
