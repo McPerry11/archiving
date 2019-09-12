@@ -90,7 +90,7 @@
       <h4>Add</h4>
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
-          <div class="input-field col s12">
+          <div class="input-field col s8">
             <p class="caption">College</p>
             <select name="college">
               @foreach(\App\College::all() as $college)
@@ -124,17 +124,17 @@
           <p class="caption">Publisher</p>
           <input name="publisher" type="text" class="validate" placeholder="Enter the publisher">
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Proceeding Date</p>
-          <input name="proceeding_date" type="text" class="validate" placeholder="Enter the proceeding date">
+          <input name="proceeding_date" type="text" class="validate" placeholder="MM-DD-YYYY">
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Presentation Date</p>
-          <input name="presentation_date" type="text" class="validate" placeholder="Enter the presentation date">
+          <input name="presentation_date" type="text" class="validate" placeholder="MM-DD-YYYY">
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Publication Date</p>
-          <input name="publication_date" type="text" class="validate" placeholder="Enter the publication date">
+          <input name="publication_date" type="text" class="validate" placeholder="MM-DD-YYYY">
         </div>
         <div class="input-field col s12">
           <p class="caption">Note</p>
@@ -148,7 +148,7 @@
           <p class="caption">URL</p>
           <input name="url" type="text" class="validate" placeholder="Website / URL">
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s5">
           <p class="caption">Attachments</p>
           <ul class="collection">
             <a href="javascript:void(0)" class="btnAddFile collection-item center-align">

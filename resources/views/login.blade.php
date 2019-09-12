@@ -26,5 +26,12 @@
   </div>
 </div>
 <img src="{{ asset('img/logo/ue.png') }}" style="position:absolute;top:10px;left:10px" alt="" height="80px">
-<img src="{{ asset('img/logo/rnd.png') }}" style="position:absolute;right:10px;bottom:10px" alt="" height="80px">
+.fix{
+    position:fixed;
+    bottom:0px;
+    left:50%;
+}
+<img src="{{ asset('img/logo/rnd.png') }}" class="fix"/>
+
+<!-- <img src="{{ asset('img/logo/rnd.png') }}" style="position:absolute;right:10px;bottom:10px" alt="" height="80px"> -->
 @endsection

@@ -38,7 +38,7 @@ loadDatatable()
           </tbody>
         </table>
       </div>
-      <img src="{{ asset('img/logo/rnd.png') }}" style="float:right" alt="" height="40px">
+      <img src="{{ asset('img/logo/rnd.png') }}" style="position:fixed;right:10px;bottom:10px" alt="" height="30px">
     </div>
   </div>
 @endsection
