@@ -9,7 +9,7 @@
       <h4>View</h4>
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
-          <div class="input-field col s12">
+          <div class="input-field col s8">
             <p class="caption">College</p>
             <select name="college">
               @foreach(\App\College::all() as $college)
@@ -38,22 +38,18 @@
         </div>
         <div class="input-field col s12">
           <p class="caption">Publisher</p>
-          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="publisher" type="text" class="validate" placeholder="Enter the publisher" disabled>
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Proceeding Date</p>
-          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="proceeding_date" type="text" class="validate" placeholder="Enter the proceeding date" disabled>
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Presentation Date</p>
-          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="presentation_date" type="text" class="validate" placeholder="Enter the presentation date" disabled>
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Publication Date</p>
-          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="publication_date" type="text" class="validate" placeholder="Enter the publication date" disabled>
         </div>
         <div class="input-field col s12">
@@ -62,15 +58,13 @@
         </div>
         <div class="input-field col s12">
           <p class="caption">Conference Name</p>
-          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="conference_name" type="text" class="validate" placeholder="Conference Name" disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">URL</p>
-          <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
           <input name="url" type="text" class="validate" placeholder="Website / URL" disabled>
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s5">
           <p class="caption">Attachments</p>
           <ul class="collection"></ul>
         </div>

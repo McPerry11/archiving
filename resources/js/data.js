@@ -67,7 +67,7 @@ function loadChips(element = 'body') {
     .find('.chips[data-name=category]')
     .chips({
       placeholder: 'Enter a category',
-      secondaryPlaceholder: '+ category'
+      secondaryPlaceholder: '+ Category'
     })
 }
 

@@ -39,9 +39,9 @@
         <table id="datatable" data-filter="0,1,2">
           <thead>
             <tr>
-              <th width="15%"><b>College</b></th>
-              <th><b>Title</b></th>
-              <th width="20%"><b>Authors</b></th>
+              <th width="5%"><b>College</b></th>
+              <th width="30%"><b>Title</b></th>
+              <th width="15%"><b>Authors</b></th>
               <th>Keywords</th>
               <th width="15%"><b>Category</b></th>
               <th>Publisher</th>
@@ -51,7 +51,7 @@
               <th>Note</th>
               <th>Conference Name</th>
               <th>URL</th>
-              <th width="15%"><b>Actions</b></th>
+              <th width="8%"><b>Actions</b></th>
             </tr>
           </thead>
           <tbody>
