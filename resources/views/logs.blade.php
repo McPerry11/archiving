@@ -12,7 +12,7 @@ loadDatatable()
     <div id="admin" class="col s12">
       <div class="card material-table">
         <div class="table-header">
-          <span class="table-title">Logs</span>
+          <span class="table-title"><b>Logs</b></span>
           <div class="actions">
             <a title="Search" href="javascript:void(0)" class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
           </div>
@@ -20,10 +20,10 @@ loadDatatable()
         <table id="datatable" data-sortby="desc">
           <thead>
             <tr>
-              <th width="5%">ID</th>
-              <th>Username</th>
-              <th>Action</th>
-              <th>Timestamp</th>
+              <th width="5%"><b>ID</b></th>
+              <th width="10%"><b>Username</b></th>
+              <th width="65%"><b>Action</b></th>
+              <th><b>Timestamp</b></th>
             </tr>
           </thead>
           <tbody>
