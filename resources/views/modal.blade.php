@@ -6,7 +6,7 @@
 <div id="viewModal" class="modal modal-fixed-footer">
   <form name="frmAdd">
     <div class="modal-content">
-      <h4>View</h4>
+      <h4><b>View</b></h4>
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
           <div class="input-field col s8">
@@ -81,7 +81,7 @@
 <div id="addModal" class="modal modal-fixed-footer">
   <form name="frmAdd">
     <div class="modal-content">
-      <h4>Add</h4>
+      <h4><b>Add</b></h4>
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
           <div class="input-field col s8">
@@ -166,7 +166,7 @@
     @method("PUT")
     <input type="hidden" name="id" disabled>
     <div class="modal-content">
-      <h4>Edit</h4>
+      <h4><b>Edit</b></h4>
       <div class="loader-container">
         <div class="preloader-wrapper big active">
           <div class="spinner-layer spinner-blue-only">
@@ -182,9 +182,11 @@
           </div>
         </div>
       </div>
+
+
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
-          <div class="input-field col s12">
+          <div class="input-field col s8">
             <p class="caption">College</p>
             <select name="college">
               @foreach(\App\College::all() as $college)
@@ -213,15 +215,15 @@
           <p class="caption">Publisher</p>
           <input name="publisher" type="text" class="validate" placeholder="Enter the publisher">
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Proceeding Date</p>
           <input name="proceeding_date" type="text" class="validate" placeholder="Enter the proceeding date">
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Presentation Date</p>
           <input name="presentation_date" type="text" class="validate" placeholder="Enter the presentation date">
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s4">
           <p class="caption">Publication Date</p>
           <input name="publication_date" type="text" class="validate" placeholder="Enter the publication date">
         </div>
@@ -237,7 +239,7 @@
           <p class="caption">URL</p>
           <input name="url" type="text" class="validate" placeholder="Website / URL">
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s5">
           <p class="caption">Attachments</p>
           <ul class="collection">
             <a href="javascript:void(0)" class="btnAddFile collection-item center-align">
