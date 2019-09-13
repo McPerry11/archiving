@@ -21,7 +21,7 @@
         <div class="input-field col s12">
           <p class="caption">Title</p>
           <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
-          <input name="title" type="text" class="validate" placeholder="Enter the title" required disabled>
+          <input name="title" type="text" class="validate" placeholder="-" required disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">Authors<i>(To add data, press enter)</i>
@@ -38,31 +38,31 @@
         </div>
         <div class="input-field col s12">
           <p class="caption">Publisher</p>
-          <input name="publisher" type="text" class="validate" placeholder="Enter the publisher" disabled>
+          <input name="publisher" type="text" class="validate" placeholder="-" disabled>
         </div>
         <div class="input-field col s4">
           <p class="caption">Proceeding Date</p>
-          <input name="proceeding_date" type="text" class="validate" placeholder="Enter the proceeding date" disabled>
+          <input name="proceeding_date" type="text" class="validate" placeholder="-" disabled>
         </div>
         <div class="input-field col s4">
           <p class="caption">Presentation Date</p>
-          <input name="presentation_date" type="text" class="validate" placeholder="Enter the presentation date" disabled>
+          <input name="presentation_date" type="text" class="validate" placeholder="-" disabled>
         </div>
         <div class="input-field col s4">
           <p class="caption">Publication Date</p>
-          <input name="publication_date" type="text" class="validate" placeholder="Enter the publication date" disabled>
+          <input name="publication_date" type="text" class="validate" placeholder="-" disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">Note</p>
-          <input name="note" type="text" class="validate" placeholder="International Database/s where Journal is Indexed" disabled>
+          <input name="note" type="text" class="validate" placeholder="-" disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">Conference Name</p>
-          <input name="conference_name" type="text" class="validate" placeholder="Conference Name" disabled>
+          <input name="conference_name" type="text" class="validate" placeholder="-" disabled>
         </div>
         <div class="input-field col s12">
           <p class="caption">URL</p>
-          <input name="url" type="text" class="validate" placeholder="Website / URL" disabled>
+          <input name="url" type="text" class="validate" placeholder="-" disabled>
         </div>
         <div class="input-field col s5">
           <p class="caption">Attachments</p>
