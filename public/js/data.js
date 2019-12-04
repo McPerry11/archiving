@@ -174,7 +174,7 @@ function refreshAttachmentList(){
 
 function isInvalidFileType(e){
   console.log(e);
-  return["php","js","exe"].indexOf(e.val().split(".").pop().toLowerCase())>-1
+  return ["pdf","jpg","jpeg","png"].indexOf(e.split(".").pop().toLowerCase())>-1
 }
 
 var _extends=Object.assign||function(e){
@@ -294,9 +294,7 @@ $(".btnAddFile").click(function(){
 }),
 $("input[name=attachment_file]").change(function(){
   var e=$(this)[0].files[0];
-  console.log(this);
-  console.log(e);
-  if($(this).val(""),isInvalidFileType($(this)))
+  if($(this).val(""),!isInvalidFileType(e.name))
     return alert("Invalid file type.");
   attachment_list.push(e),
   refreshAttachmentList()
