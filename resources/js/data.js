@@ -460,11 +460,11 @@ function refreshAttachmentList(hasAction = true) {
   list.reverse().forEach(item => {
     let name = item.filename || item.name
     $('.collection').prepend(
-      `<li class='collection-item'>
+      `<li class='collection-item' style="word-wrap: break-word;">
         ${name}
         ` +
         (hasAction
-          ? `<a style="margin-left:10px" href="javascript:void(0)" onclick="return deleteAttachment('${
+          ? `<a href="javascript:void(0)" onclick="return deleteAttachment('${
               item.id
             }','${name}')" class="secondary-content"><i class="material-icons">close</i></a>`
           : '') +

@@ -15,12 +15,14 @@ class CreateDataTable extends Migration {
       $table->increments('id');
       $table->unsignedInteger('college_id');
       $table->foreign('college_id')->references('id')->on('colleges');
-      $table->string('title')->unique();
+      $table->string('title');
       $table->text('authors')->nullable();
       $table->text('keywords')->nullable();
       $table->string('category')->nullable();
       $table->string('publisher')->nullable();
       $table->string('proceeding_date')->nullable();
+      $table->string('presentation_date')->nullable();
+      $table->string('publication_date')->nullable();
       $table->string('note')->nullable();
       $table->string('conference_name')->nullable();
       $table->string('url')->nullable();

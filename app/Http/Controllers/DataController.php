@@ -78,7 +78,7 @@ class DataController extends Controller {
       $request->authors = join(';', array_merge([Auth::user()->searchName], explode(';', $request->authors)));
     }
 
-    if (Data::where('title', $request->title)->count() > 0) {
+    if (Data::where('title', $request->title)->whereNull('deleted_at')->count() > 0) {
       return response()->json(['success' => false, 'error' => 'Title already exists.']);
     }
 
@@ -96,18 +96,20 @@ class DataController extends Controller {
     $data->conference_name   = $request->conference_name;
 
     if ($data->save()) {
-      if (count($request->attachments) > 0) {
-        foreach ($request->attachments as $file) {
-          $filename = str_replace('.' . $file->getClientOriginalExtension(), '', $file->getClientOriginalName()) . '-' . time() . '.' . $file->getClientOriginalExtension();
-          $file->move(public_path('uploads'), $filename);
+      if ($request->attachments !== NULL) {
+        if (count($request->attachments) > 0) {
+          foreach ($request->attachments as $file) {
+	    $filename = str_replace('.' . $file->getClientOriginalExtension(), '', $file->getClientOriginalName()) . '-' . time() . '.' . $file->getClientOriginalExtension();
+	    $file->move(public_path('uploads'), $filename);
 
-          $attachment = new Attachment;
-          $attachment->data()->associate($data);
-          $attachment->filename = $filename;
-          $attachment->save();
+            $attachment = new Attachment;
+            $attachment->data()->associate($data);
+            $attachment->filename = $filename;
+            $attachment->save();
+	  }
         }
       }
-      Log::create(['action' => Auth::user()->username . ' added a research with ID: ' . $data->id]);
+      Log::create(['action' => Auth::user()->username . ' added a research with title: ' . $data->title]);
       return response()->json(['success' => true]);
     } else {
       return response()->json(['success' => false, 'error' => 'Nothing changed!']);
@@ -157,7 +159,7 @@ class DataController extends Controller {
             $attachment->delete();
           }
         }
-        Log::create(['action' => Auth::user()->username . ' edited a research with ID: ' . $data->id]);
+        Log::create(['action' => Auth::user()->username . ' edited a research with title: ' . $data->title]);
         return response()->json(['success' => true]);
       } else {
         return response()->json(['success' => false, 'error' => $arr]);
@@ -174,7 +176,7 @@ class DataController extends Controller {
 
     if (Auth::user()->isSuperAdmin || Auth::user()->isAdmin || $data->isResearchOwner) {
       if ($data->delete()) {
-        Log::create(['action' => Auth::user()->username . ' deleted a research with ID: ' . $data->id]);
+        Log::create(['action' => Auth::user()->username . ' deleted a research with title: ' . $data->title]);
         return response()->json(['success' => true]);
       } else {
         return response()->json(['success' => false, 'error' => 'Nothing changed!']);
