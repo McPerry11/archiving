@@ -152,12 +152,18 @@ function deleteData(e){
 }
 
 function deleteAttachment(e,t){
-  console.log(e);
   if(!confirm("Are you sure do you want delete this file?"))return!1;
+  console.log(e, t);
   e?(attachment_to_delete.push(e),
-    old_attachment_list=old_attachment_list.filter(function(e){
+      old_attachment_list=old_attachment_list.filter(function(e){
       return e.filename!=t
-    })):attachment_list.splice(attachment_list.indexOf(t),1),
+    })):attachment_list.splice(function(){
+      for(var a=0; a < attachment_list.length; a++)
+        if(attachment_list[a].name==t)
+	  console.log(a);
+	  return a
+    },1),
+  console.log(attachment_list),
   refreshAttachmentList()
 }
 
@@ -173,7 +179,6 @@ function refreshAttachmentList(){
 }
 
 function isInvalidFileType(e){
-  console.log(e);
   return ["pdf","jpg","jpeg","png"].indexOf(e.split(".").pop().toLowerCase())>-1
 }
 
@@ -282,6 +287,7 @@ $("form[name=frmEdit]").submit(function(e){
     processData:!1,
     dataType:"json",
     success:function(e){
+      console.log(e.success);
       1==e.success?(old_attachment_list=[],alert("Updated Successfully!"),$("#editModal").modal("close"),$(this).trigger("reset"),loadTable()):(console.log(e),alert(e.error))
     }
   }).always(function(){
