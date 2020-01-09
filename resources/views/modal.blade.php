@@ -1,7 +1,7 @@
 <!-- Look for this line (yung nasa baba) para sa pag edit ng view: -->
-  <!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
+<!-- EDIT THIS INPUT TO DIV CONTAINER VIEW -->
 
-  <!-- PDF From "View" form is carried on to the "Add" form -->
+<!-- PDF From "View" form is carried on to the "Add" form -->
 
 <div id="viewModal" class="modal modal-fixed-footer">
   <form name="frmAdd">
@@ -9,14 +9,14 @@
       <h4><b>View</b></h4>
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
-          <div class="input-field col s8">
-            <p class="caption">College</p>
-            <select name="college">
-              @foreach(\App\College::all() as $college)
-                <option value="{{ $college->id }}" data-icon="{{ asset('img/logo/' . $college->logo) }}">{{ $college->description }}</option>
-              @endforeach
-            </select>
-          </div>
+        <div class="input-field col s8">
+          <p class="caption">College</p>
+          <select name="college">
+            @foreach(\App\College::all() as $college)
+            <option value="{{ $college->id }}" data-icon="{{ asset('img/logo/' . $college->logo) }}">{{ $college->description }}</option>
+            @endforeach
+          </select>
+        </div>
         @endif
         <div class="input-field col s12">
           <p class="caption">Title</p>
@@ -83,15 +83,15 @@
     <div class="modal-content">
       <h4><b>Add</b></h4>
       <div class="row">
-        @if(Auth::user()->isSuperAdmin)
-          <div class="input-field col s8">
-            <p class="caption">College</p>
-            <select name="college">
-              @foreach(\App\College::all() as $college)
-                <option value="{{ $college->id }}" data-icon="{{ asset('img/logo/' . $college->logo) }}">{{ $college->description }}</option>
-              @endforeach
-            </select>
-          </div>
+        @if(Auth::user()->isSuperAdmin&&!Request::is('college'))
+        <div class="input-field col s8">
+          <p class="caption">College</p>
+          <select name="college">
+            @foreach(\App\College::all() as $college)
+            <option value="{{ $college->id }}" data-icon="{{ asset('img/logo/' . $college->logo) }}">{{ $college->description }}</option>
+            @endforeach
+          </select>
+        </div>
         @endif
         <div class="input-field col s12">
           <p class="caption">Title</p>
@@ -100,7 +100,7 @@
         <div class="input-field col s12">
           <p class="caption">Authors
             @if(!Auth::user()->isAdmin)
-              <i>(Your name is already added)</i>
+            <i>(Your name is already added)</i>
             @endif
             <i>(To add data, press enter)</i>
           </p>
@@ -186,14 +186,14 @@
 
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
-          <div class="input-field col s8">
-            <p class="caption">College</p>
-            <select name="college">
-              @foreach(\App\College::all() as $college)
-                <option value="{{ $college->id }}" data-icon="{{ asset('img/logo/' . $college->logo) }}">{{ $college->description }}</option>
-              @endforeach
-            </select>
-          </div>
+        <div class="input-field col s8">
+          <p class="caption">College</p>
+          <select name="college">
+            @foreach(\App\College::all() as $college)
+            <option value="{{ $college->id }}" data-icon="{{ asset('img/logo/' . $college->logo) }}">{{ $college->description }}</option>
+            @endforeach
+          </select>
+        </div>
         @endif
         <div class="input-field col s12">
           <p class="caption">Title</p>

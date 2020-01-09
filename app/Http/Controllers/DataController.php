@@ -9,6 +9,7 @@ use App\Imports\DataImport;
 use App\Log;
 use App\User;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -75,11 +76,15 @@ class DataController extends Controller {
     $data = new Data;
 
     if (!Auth::user()->isAdmin) {
-      $request->authors = join(';', array_merge([Auth::user()->searchName], explode(';', $request->authors)));
+      $request->authors = join(array_merge([Auth::user()->searchName], explode(';', $request->authors))); 
     }
 
     if (Data::where('title', $request->title)->whereNull('deleted_at')->count() > 0) {
       return response()->json(['success' => false, 'error' => 'Title already exists.']);
+    }
+
+    if (Auth::user()->isSuperAdmin) {
+      $request->college = 3;
     }
 
     $data->college_id        = $request->college ?? Auth::user()->college_id;
@@ -99,22 +104,22 @@ class DataController extends Controller {
       if ($request->attachments !== NULL) {
         if (count($request->attachments) > 0) {
           foreach ($request->attachments as $file) {
-	    $filename = str_replace('.' . $file->getClientOriginalExtension(), '', $file->getClientOriginalName()) . '-' . time() . '.' . $file->getClientOriginalExtension();
-	    $file->move(public_path('uploads'), $filename);
+           $filename = str_replace('.' . $file->getClientOriginalExtension(), '', $file->getClientOriginalName()) . '-' . time() . '.' . $file->getClientOriginalExtension();
+           $file->move(public_path('uploads'), $filename);
 
-            $attachment = new Attachment;
-            $attachment->data()->associate($data);
-            $attachment->filename = $filename;
-            $attachment->save();
-	  }
-        }
-      }
-      Log::create(['action' => Auth::user()->username . ' added a research with title: ' . $data->title]);
-      return response()->json(['success' => true]);
-    } else {
-      return response()->json(['success' => false, 'error' => 'Nothing changed!']);
-    }
+           $attachment = new Attachment;
+           $attachment->data()->associate($data);
+           $attachment->filename = $filename;
+           $attachment->save();
+         }
+       }
+     }
+     Log::create(['action' => Auth::user()->username . ' added a research with title: ' . $data->title]);
+     return response()->json(['success' => true]);
+   } else {
+    return response()->json(['success' => false, 'error' => 'Nothing changed!']);
   }
+}
   /**
    * @param Request $request
    */
@@ -274,7 +279,7 @@ class DataController extends Controller {
       }
     }
 
-    return \Excel::download(new DataExport($data), date('F_d_Y_h_i_s_A') . ' Archiving System Report.xlsx');
+    return \Excel::download(new DataExport($data), ' Archiving System Report - ' . Carbon::now('+8:00') . '.xlsx');
   }
 
   /**
@@ -284,10 +289,11 @@ class DataController extends Controller {
     $attachment = Attachment::findOrFail($id);
     $data       = Data::where('title', $title)->firstOrFail();
 
-    if (Auth::user()->isSuperAdmin || Auth::user()->isAdmin || $data->isResearchOwner) {
-      return response()->file(public_path('uploads/' . $attachment->filename));
-    } else {
-      abort(404);
-    }
+    return response()->file(public_path('uploads/' . $attachment->filename));
+    // if (Auth::user()->isSuperAdmin || Auth::user()->isAdmin || $data->isResearchOwner) {
+    //   return response()->file(public_path('uploads/' . $attachment->filename));
+    // } else {
+    //   abort(404);
+    // }
   }
 }

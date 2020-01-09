@@ -29,8 +29,8 @@ function loadTable(){
         }),
         buttonsEnabled=!1,
         deleteEnabled=!0,
-        "all"==e&&config.isSuperAdmin?buttonsEnabled=!0:"college"==e&&config.isAdmin?buttonsEnabled=!0:"my"!=e||config.isGuest||(buttonsEnabled=!0),
         config.isAdmin||config.isSuperAdmin||(deleteEnabled=!1),
+        "all"==e&&config.isSuperAdmin?buttonsEnabled=!0:"college"==e&&config.isAdmin?buttonsEnabled=!0:"my"==e&&config.isResearcher?buttonsEnabled=deleteEnabled=1:buttonsEnabled=0,
         dTable.row.add([
           "all"==e?a.college.toUpperCase():t+1,a.title,(a.authors||"").replace(/;/g,"<br>"),
           (a.keywords||"").replace(/;/g,", "),
@@ -43,7 +43,7 @@ function loadTable(){
           a.conference_name,
           a.url,
           '\n            <button onclick="viewData('+a.id+')" class="waves-effect waves-light btn btn-flat btnView">\n              <i class="material-icons">remove_red_eye</i>\n            </button>'+(buttonsEnabled?'\n            <button onclick="editData('+a.id+')" class="waves-effect waves-light btn btn-flat btnEdit">\n              <i class="material-icons">edit</i>\n            </button>'+(deleteEnabled?'\n            <button onclick="deleteData('+a.id+')" class="waves-effect waves-light btn btn-flat btnDelete">\n              <i class="material-icons">delete</i>\n            </button>':""):"")
-        ])
+          ])
       }),
       dTable.draw()
     }
@@ -151,18 +151,19 @@ function deleteData(e){
     }))
 }
 
+function deleteIndex(t) {
+  for(var a=0; a < attachment_list.length; a++) {
+    if(attachment_list[a].name==t)
+      return a
+  }
+}
+
 function deleteAttachment(e,t){
   if(!confirm("Are you sure do you want delete this file?"))return!1;
-  console.log(e, t);
-  e?(attachment_to_delete.push(e),
-      old_attachment_list=old_attachment_list.filter(function(e){
-      return e.filename!=t
-    })):attachment_list.splice(function(){
-      for(var a=0; a < attachment_list.length; a++)
-        if(attachment_list[a].name==t)
-	  console.log(a);
-	  return a
-    },1),
+  if (e == "undefined") {
+    e = null
+  }
+  e?(attachment_to_delete.push(e),old_attachment_list=old_attachment_list.filter(function(e){return e.filename!=t})):attachment_list.splice(deleteIndex(t),1),
   console.log(attachment_list),
   refreshAttachmentList()
 }
@@ -170,9 +171,9 @@ function deleteAttachment(e,t){
 function refreshAttachmentList(){
   var e=!(arguments.length>0&&void 0!==arguments[0])||arguments[0];
   $(".collection").find("li.collection-item").remove();
-  var t=[].concat(_toConsumableArray(old_attachment_list),_toConsumableArray([].concat(_toConsumableArray(attachment_list)).reverse()));
+  var t=[].concat(_toConsumableArray(old_attachment_list),_toConsumableArray([].concat(_toConsumableArray(attachment_list))));
   console.log(t),
-  t.reverse().forEach(function(t){
+  t.forEach(function(t){
     var a=t.filename||t.name;
     $(".collection").prepend("<li class='collection-item row'>\n       <p class='col s10' style='margin: 0; word-break: break-word;'> "+a+"</p>\n        <div class='col s2 row' style='margin: 0'>\n			"+(e?'<a href="javascript:void(0)" onclick="return deleteAttachment(\''+t.id+"','"+a+'\')" class="secondary-content col s12" style="padding: 0"><i class="material-icons">close</i></a>':"")+(t.filename?'\n        <a href="'+main_url+"uploads/"+t.title+"/"+t.id+'" target="_blank" class="secondary-content col s12" style="padding: 0"><i class="material-icons">remove_red_eye</i></a>\n        </div>\n</li>':""))
   })
@@ -193,7 +194,8 @@ var _extends=Object.assign||function(e){
 old_attachment_list=[],
 attachment_list=[],
 attachment_to_delete=[];
-$(document).ready(function(){
+
+$(function(){
   getConfig(),loadDatatable({
     columnDefs:[{
       targets:[3,5,6,7,8,9,10,11],
@@ -222,10 +224,10 @@ $(document).ready(function(){
     }
   })
 }),
-$(".generate-pdf").click(function(){
-  $("input[type=search]").val()&&$("input[name=pdf_data]").val(JSON.stringify(Object.values(dTable.rows({filter:"applied"}).data()))),
-  $("input[name=pdf_data]").closest("form").trigger("submit")
-}),
+// $(".generate-pdf").click(function(){
+//   $("input[type=search]").val()&&$("input[name=pdf_data]").val(JSON.stringify(Object.values(dTable.rows({filter:"applied"}).data()))),
+//   $("input[name=pdf_data]").closest("form").trigger("submit")
+// }),
 $(".generate-excel").click(function(){
   $("input[type=search]").val()&&$("input[name=excel_data]").val(JSON.stringify(Object.values(dTable.rows({filter:"applied"}).data()))),
   $("input[name=excel_data]").closest("form").trigger("submit")
@@ -255,7 +257,7 @@ $("form[name=frmAdd]").submit(function(e){
     contentType:!1,
     success:function(e){
       console.log(e),
-      1==e.success?(alert("Added Successfully!"),$(this).trigger("reset"),loadChips("#addModal"),$("#addModal").modal("close"),loadTable()):(console.log(e),alert(e.error))
+      1==e.success?(alert("Added Successfully!"),$(this).trigger("reset"),loadChips("#addModal"),$("#addModal").modal("close"),loadTable(),attachment_list=[]):(console.log(e),alert(e.error))
     }
   }).always(function(){
     $(this).find("input").prop("readonly",!1),
@@ -301,7 +303,7 @@ $(".btnAddFile").click(function(){
 $("input[name=attachment_file]").change(function(){
   var e=$(this)[0].files[0];
   if($(this).val(""),!isInvalidFileType(e.name))
-    return alert("Invalid file type.");
+    return alert("Invalid file type. Please upload a PDF or an Image.");
   attachment_list.push(e),
   refreshAttachmentList()
 });
