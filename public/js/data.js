@@ -46,8 +46,18 @@ function loadTable(){
           ])
       }),
       dTable.draw()
+    },
+    error: function() {
+      alert('Something went wrong. Please refresh and try again.');
     }
   })
+}
+
+function addData() {
+  attachment_list = [];
+  old_attachment_list = [];
+  attachment_to_delete = [];
+  refreshAttachmentList()
 }
 
 function viewData(e){
@@ -172,7 +182,6 @@ function refreshAttachmentList(){
   var e=!(arguments.length>0&&void 0!==arguments[0])||arguments[0];
   $(".collection").find("li.collection-item").remove();
   var t=[].concat(_toConsumableArray(old_attachment_list),_toConsumableArray([].concat(_toConsumableArray(attachment_list))));
-  console.log(t),
   t.forEach(function(t){
     var a=t.filename||t.name;
     $(".collection").prepend("<li class='collection-item row'>\n       <p class='col s10' style='margin: 0; word-break: break-word;'> "+a+"</p>\n        <div class='col s2 row' style='margin: 0'>\n			"+(e?'<a href="javascript:void(0)" onclick="return deleteAttachment(\''+t.id+"','"+a+'\')" class="secondary-content col s12" style="padding: 0"><i class="material-icons">close</i></a>':"")+(t.filename?'\n        <a href="'+main_url+"uploads/"+t.title+"/"+t.id+'" target="_blank" class="secondary-content col s12" style="padding: 0"><i class="material-icons">remove_red_eye</i></a>\n        </div>\n</li>':""))

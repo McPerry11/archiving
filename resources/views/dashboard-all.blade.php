@@ -22,7 +22,7 @@
           <a title="Download as Excel" class="generate-excel modal-trigger waves-effect btn-flat nopadding"><i class="material-icons left">assessment</i>Excel</a>
           @endif
           @if(Auth::user()->isAdmin)
-          <a title="Add" href="#addModal" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">add</i></a>
+          <a title="Add" href="#addModal" onclick="addData()" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">add</i></a>
           @endif
           <a title="Search" href="javascript:void(0)" class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
         </div>
