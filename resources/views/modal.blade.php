@@ -7,6 +7,22 @@
   <form name="frmAdd">
     <div class="modal-content">
       <h4><b>View</b></h4>
+      <div class="loader-container">
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
         <div class="input-field col s8">
@@ -75,8 +91,6 @@
     </div>
   </form>
 </div>
-
-
 
 <div id="addModal" class="modal modal-fixed-footer">
   <form name="frmAdd">
@@ -153,14 +167,13 @@
         <input type="file" name="attachment_file" style="display:none">
       </div>
     </div>
-
-
     <div class="modal-footer">
       <button type="button" class="modal-close waves-effect waves-green btn-flat">Close</button>
       <button type="submit" class="waves-effect waves-green btn-flat">Add</button>
     </div>
   </form>
 </div>
+
 <div id="editModal" class="modal modal-fixed-footer">
   <form name="frmEdit">
     @method("PUT")
@@ -182,7 +195,6 @@
           </div>
         </div>
       </div>
-
 
       <div class="row">
         @if(Auth::user()->isSuperAdmin)
@@ -256,6 +268,7 @@
     </div>
   </form>
 </div>
+
 <div id="changePasswordModal" class="modal modal-fixed-footer">
   <form name="frmChangePassword">
     <div class="modal-content">
