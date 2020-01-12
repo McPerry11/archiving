@@ -51,7 +51,7 @@
             <th>Note</th>
             <th>Conference Name</th>
             <th>URL</th>
-            <th width="6%"><b>Actions</b></th>
+            <th width="7%"><b>Actions</b></th>
           </tr>
         </thead>
         <tbody>

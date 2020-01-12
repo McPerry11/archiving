@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -17,6 +18,7 @@ class DataExport implements FromView, ShouldAutoSize {
   public function view(): View {
     return view('excel', [
       'data' => $this->data
+      'timestamp' => Carbon::now('+8:00');
     ]);
   }
 }

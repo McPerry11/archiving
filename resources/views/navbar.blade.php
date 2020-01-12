@@ -15,7 +15,9 @@
       @if(Auth::user()->isSuperAdmin)
       <li><a href="{{ url('all') }}">All Researches</a></li>
       @endif
+      @if(!Auth::user()->isSuperAdmin)
       <li><a href="{{ url('college') }}">College Researches</a></li>
+      @endif
       @if(Auth::user()->isAdmin)
       <li><a href="{{ url('accounts') }}">Accounts</a></li>
       @endif

@@ -17,7 +17,7 @@ class CollegesTableSeeder extends Seeder {
       ['name' => 'ccss', 'description' => 'College of Computer Studies and Systems', 'logo' => 'ccss.png', 'background' => 'CCSS.jpg'],
       ['name' => 'cengg', 'description' => 'College of Engineering', 'logo' => 'eng.png', 'background' => 'CENGG.jpg'],
       ['name' => 'dentistry', 'description' => 'College of Dentistry', 'logo' => 'dent.png', 'background' => 'Dentistry.jpg'],
-      ['name' => 'educ', 'description' => 'College of Education', 'logo' => 'educ.png', 'background' => 'Educ.jpg']
+      ['name' => 'educ', 'description' => 'College of Education', 'logo' => 'educ.png', 'background' => 'Educ.jpg'],
     ];
 
     foreach ($data as $datum) {

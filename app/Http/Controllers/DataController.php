@@ -250,7 +250,6 @@ class DataController extends Controller {
   protected function excel(Request $request) {
     if ($request->excel_data) {
       $request->excel_data = json_decode($request->excel_data);
-
       $data = [];
 
       foreach ($request->excel_data as $id => $value) {

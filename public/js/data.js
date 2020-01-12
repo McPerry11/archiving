@@ -48,6 +48,7 @@ function loadTable(){
         }),
         dTable.draw()
       } catch (err) {
+        console.log(err);
         $('.dataTables_empty').text('Something went wrong. Please refresh and try again.');
       }
     },
@@ -103,6 +104,7 @@ function viewData(e){
       }),
       refreshAttachmentList(!1),
       t.find("input.input").prop("disabled",!0),
+      t.find(".close").hide(),
       t.find(".loader-container").fadeOut()
     },
     error: function() {
@@ -262,7 +264,8 @@ $("form[name=frmAdd]").submit(function(e){
     return alert("Please enter an author.");
   $(this).find("input").prop("readonly",!0),
   $(this).find("button").prop("disabled",!0);
-  var i=new FormData($(this)[0]);i.append("authors",t.join(";")),
+  var i=new FormData($(this)[0]);
+  i.append("authors",t.join(";")),
   i.append("keywords",a.join(";")),
   i.append("category",n.join(";")),
   attachment_list.forEach(function(e){
