@@ -22,30 +22,34 @@ function loadTable(){
     dataType:"json",
     data:{filter:e},
     success:function(t){
-      dTable.clear(),
-      $.each(t,function(t,a){
-        a=_.mapObject(a,function(e){
-          return _.escape(e)
+      try {
+        dTable.clear(),
+        $.each(t,function(t,a){
+          a=_.mapObject(a,function(e){
+            return _.escape(e)
+          }),
+          buttonsEnabled=!1,
+          deleteEnabled=!0,
+          config.isAdmin||config.isSuperAdmin||(deleteEnabled=!1),
+          "all"==e&&config.isSuperAdmin?buttonsEnabled=!0:"college"==e&&config.isAdmin?buttonsEnabled=!0:"my"==e&&config.isResearcher?buttonsEnabled=deleteEnabled=1:buttonsEnabled=0,
+          dTable.row.add([
+            "all"==e?a.college.toUpperCase():t+1,a.title,(a.authors||"").replace(/;/g,"<br>"),
+            (a.keywords||"").replace(/;/g,", "),
+            (a.category||"").replace(/;/g,", "),
+            a.publisher,
+            a.proceeding_date,
+            a.presentation_date,
+            a.publication_date,
+            a.note,
+            a.conference_name,
+            a.url,
+            '\n            <button onclick="viewData('+a.id+')" class="waves-effect waves-light btn btn-flat btnView">\n              <i class="material-icons">remove_red_eye</i>\n            </button>'+(buttonsEnabled?'\n            <button onclick="editData('+a.id+')" class="waves-effect waves-light btn btn-flat btnEdit">\n              <i class="material-icons">edit</i>\n            </button>'+(deleteEnabled?'\n            <button onclick="deleteData('+a.id+')" class="waves-effect waves-light btn btn-flat btnDelete">\n              <i class="material-icons">delete</i>\n            </button>':""):"")
+            ])
         }),
-        buttonsEnabled=!1,
-        deleteEnabled=!0,
-        config.isAdmin||config.isSuperAdmin||(deleteEnabled=!1),
-        "all"==e&&config.isSuperAdmin?buttonsEnabled=!0:"college"==e&&config.isAdmin?buttonsEnabled=!0:"my"==e&&config.isResearcher?buttonsEnabled=deleteEnabled=1:buttonsEnabled=0,
-        dTable.row.add([
-          "all"==e?a.college.toUpperCase():t+1,a.title,(a.authors||"").replace(/;/g,"<br>"),
-          (a.keywords||"").replace(/;/g,", "),
-          (a.category||"").replace(/;/g,", "),
-          a.publisher,
-          a.proceeding_date,
-          a.presentation_date,
-          a.publication_date,
-          a.note,
-          a.conference_name,
-          a.url,
-          '\n            <button onclick="viewData('+a.id+')" class="waves-effect waves-light btn btn-flat btnView">\n              <i class="material-icons">remove_red_eye</i>\n            </button>'+(buttonsEnabled?'\n            <button onclick="editData('+a.id+')" class="waves-effect waves-light btn btn-flat btnEdit">\n              <i class="material-icons">edit</i>\n            </button>'+(deleteEnabled?'\n            <button onclick="deleteData('+a.id+')" class="waves-effect waves-light btn btn-flat btnDelete">\n              <i class="material-icons">delete</i>\n            </button>':""):"")
-          ])
-      }),
-      dTable.draw()
+        dTable.draw()
+      } catch (err) {
+        $('.dataTables_empty').text('Something went wrong. Please refresh and try again.');
+      }
     },
     error: function() {
       alert('Something went wrong. Please refresh and try again.');
@@ -100,6 +104,10 @@ function viewData(e){
       refreshAttachmentList(!1),
       t.find("input.input").prop("disabled",!0),
       t.find(".loader-container").fadeOut()
+    },
+    error: function() {
+      alert('Something went wrong. Please try again later.');
+      $("#viewModal").modal("close");
     }
   })
 }
@@ -144,6 +152,10 @@ function editData(e){
       }),
       refreshAttachmentList(),
       t.find(".loader-container").fadeOut()
+    },
+    error: function() {
+      alert('Something went wrong. Please try again later.');
+      $("#editModal").modal("close");
     }
   })
 }
