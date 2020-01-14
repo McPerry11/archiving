@@ -13,7 +13,7 @@ class GradController extends Controller
    */
   public function index()
   {
-    
+    return view('grad_dashboard');
   }
 
   /**

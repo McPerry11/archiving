@@ -32,11 +32,11 @@ $('form[name=frmLogin]').submit(function(e) {
   e.preventDefault()
 
   $(this)
-    .find('input')
-    .prop('readonly', true)
+  .find('input')
+  .prop('readonly', true)
   $(this)
-    .find('button[type=submit]')
-    .prop('disabled', true)
+  .find('button[type=submit]')
+  .prop('disabled', true)
 
   $.ajax({
     context: this,
@@ -45,21 +45,26 @@ $('form[name=frmLogin]').submit(function(e) {
     data: $(this).serialize(),
     dataType: 'json'
   })
-    .done(function(response) {
-      if (response.success) {
-        location.href = './'
+  .done(function(response) {
+    if (response.success) {
+      alert(response.college);
+      if (response.college == 7) {
+        location.href = './grad/'
       } else {
-        alert(response.error)
+        location.href = './'
       }
-    })
-    .always(function() {
-      $(this)
-        .find('input')
-        .prop('readonly', false)
-      $(this)
-        .find('button[type=submit]')
-        .prop('disabled', false)
-    })
+    } else {
+      alert(response.error)
+    }
+  })
+  .always(function() {
+    $(this)
+    .find('input')
+    .prop('readonly', false)
+    $(this)
+    .find('button[type=submit]')
+    .prop('disabled', false)
+  })
 })
 
 function loadDatatable(obj = {}) {
@@ -72,14 +77,14 @@ function loadDatatable(obj = {}) {
       sSearchPlaceholder: 'Enter Keywords Here',
       sInfo: '_START_ -_END_ of _TOTAL_',
       sLengthMenu:
-        '<span>Rows per page:</span><select class="browser-default">' +
-        '<option value="10">10</option>' +
-        '<option value="20">20</option>' +
-        '<option value="30">30</option>' +
-        '<option value="40">40</option>' +
-        '<option value="50">50</option>' +
-        '<option value="-1">All</option>' +
-        '</select></div>'
+      '<span>Rows per page:</span><select class="browser-default">' +
+      '<option value="10">10</option>' +
+      '<option value="20">20</option>' +
+      '<option value="30">30</option>' +
+      '<option value="40">40</option>' +
+      '<option value="50">50</option>' +
+      '<option value="-1">All</option>' +
+      '</select></div>'
     },
     bAutoWidth: false,
     search: {
@@ -97,40 +102,40 @@ $('form[name=frmChangePassword]').submit(function(e) {
 
   if (
     $(this)
-      .find('input[name=new_password]')
-      .val() !=
+    .find('input[name=new_password]')
+    .val() !=
     $(this)
-      .find('input[name=v_new_password]')
-      .val()
-  ) {
+    .find('input[name=v_new_password]')
+    .val()
+    ) {
     return alert("The new password confirmation doesn't match")
+}
+
+$(this)
+.find('button')
+.prop('disabled', true)
+
+$.ajax({
+  context: this,
+  type: 'POST',
+  url: api_url + 'user/changepassword',
+  data: $(this).serialize(),
+  dataType: 'json'
+})
+.done(function(response) {
+  if (response.success) {
+    alert('Password changed successfully!')
+    $(this).trigger('reset')
+    $('#changePasswordModal').modal('close')
+  } else {
+    alert(response.error)
   }
-
+})
+.always(function() {
   $(this)
-    .find('button')
-    .prop('disabled', true)
-
-  $.ajax({
-    context: this,
-    type: 'POST',
-    url: api_url + 'user/changepassword',
-    data: $(this).serialize(),
-    dataType: 'json'
-  })
-    .done(function(response) {
-      if (response.success) {
-        alert('Password changed successfully!')
-        $(this).trigger('reset')
-        $('#changePasswordModal').modal('close')
-      } else {
-        alert(response.error)
-      }
-    })
-    .always(function() {
-      $(this)
-        .find('button')
-        .prop('disabled', false)
-    })
+  .find('button')
+  .prop('disabled', false)
+})
 })
 
 function getConfig() {

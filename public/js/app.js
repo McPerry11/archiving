@@ -58,76 +58,76 @@ _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){
           else{
             switch(l="",c="",y){
               case"first":
-                l=b.sFirst,c=y+(s>0?"":" disabled");
-                break;
+              l=b.sFirst,c=y+(s>0?"":" disabled");
+              break;
               case"previous":
-                l='<i class="material-icons">chevron_left</i>',c=y+(s>0?"":" disabled");
-                break;
+              l='<i class="material-icons">chevron_left</i>',c=y+(s>0?"":" disabled");
+              break;
               case"next":
-                l='<i class="material-icons">chevron_right</i>',c=y+(s<d-1?"":" disabled");
-                break;
+              l='<i class="material-icons">chevron_right</i>',c=y+(s<d-1?"":" disabled");
+              break;
               case"last":
-                l=b.sLast,c=y+(s<d-1?"":" disabled")
+              l=b.sLast,c=y+(s<d-1?"":" disabled")
             }
             l&&(m=e("<li>",{class:f.sPageButton+" "+c,id:0===i&&"string"==typeof y?n.sTableId+"_"+y:null}).append(e("<a>",{href:"#","aria-controls":n.sTableId,"data-dt-idx":h,tabindex:n.iTabIndex}).html(l)).appendTo(a),n.oApi._fnBindAction(m,{action:y},g),h++)
           }
-      }
-      (e(o).empty().html('<ul class="material-pagination"/>').children("ul"),r),u&&e(o).find("[data-dt-idx="+u+"]").focus()
-    },
-    a.TableTools&&(e.extend(!0,a.TableTools.classes,{
-      container:"DTTT btn-group",
-      buttons:{normal:"btn btn-default",disabled:"disabled"},
-      collection:{container:"DTTT_dropdown dropdown-menu",buttons:{normal:"",disabled:"disabled"}},
-      print:{info:"DTTT_print_info"},
-      select:{row:"active"}
+        }
+        (e(o).empty().html('<ul class="material-pagination"/>').children("ul"),r),u&&e(o).find("[data-dt-idx="+u+"]").focus()
+      },
+      a.TableTools&&(e.extend(!0,a.TableTools.classes,{
+        container:"DTTT btn-group",
+        buttons:{normal:"btn btn-default",disabled:"disabled"},
+        collection:{container:"DTTT_dropdown dropdown-menu",buttons:{normal:"",disabled:"disabled"}},
+        print:{info:"DTTT_print_info"},
+        select:{row:"active"}
+      }),
+      e.extend(!0,a.TableTools.DEFAULTS.oTags,{collection:{container:"ul",button:"li",liner:"a"}}))
+    };
+    "function"==typeof define&&define.amd?define(["jquery","datatables"],n):"object"===("undefined"==typeof exports?"undefined":_typeof(exports))?n(require("jquery"),require("datatables")):jQuery&&n(jQuery,jQuery.fn.dataTable)
+  }
+  (window,document);
+  var main_url=$("base").attr("href"),api_url=$("base").attr("href")+"api/";
+  $(document).ready(function(){
+    $.ajaxSetup({
+      headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}
     }),
-    e.extend(!0,a.TableTools.DEFAULTS.oTags,{collection:{container:"ul",button:"li",liner:"a"}}))
-  };
-  "function"==typeof define&&define.amd?define(["jquery","datatables"],n):"object"===("undefined"==typeof exports?"undefined":_typeof(exports))?n(require("jquery"),require("datatables")):jQuery&&n(jQuery,jQuery.fn.dataTable)
-}
-(window,document);
-var main_url=$("base").attr("href"),api_url=$("base").attr("href")+"api/";
-$(document).ready(function(){
-  $.ajaxSetup({
-    headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}
+    $(".modal").modal({
+      endingTop:"5%",dismissible:!1
+    }),
+    $("select").formSelect(),
+    $(".datepicker").datepicker({autoClose:!0,container:"body",format:"mmmm dd, yyyy"}),
+    $(".dropdown-trigger").dropdown({coverTrigger:!1}),$(".sidenav").sidenav()
   }),
-  $(".modal").modal({
-    endingTop:"5%",dismissible:!1
+  $("form[name=frmLogin]").submit(function(e){
+    e.preventDefault(),
+    $(this).find("input").prop("readonly",!0),
+    $(this).find("button[type=submit]").prop("disabled",!0),
+    $.ajax({
+      context:this,
+      type:"POST",
+      url:main_url+"login",
+      data:$(this).serialize(),
+      dataType:"json"
+    }).done(function(e){
+      e.success?e.college==7?location.href="./grad/":location.href="./":alert(e.error)
+    }).always(function(){
+      $(this).find("input").prop("readonly",!1),
+      $(this).find("button[type=submit]").prop("disabled",!1)
+    })
   }),
-  $("select").formSelect(),
-  $(".datepicker").datepicker({autoClose:!0,container:"body",format:"mmmm dd, yyyy"}),
-  $(".dropdown-trigger").dropdown({coverTrigger:!1}),$(".sidenav").sidenav()
-}),
-$("form[name=frmLogin]").submit(function(e){
-  e.preventDefault(),
-  $(this).find("input").prop("readonly",!0),
-  $(this).find("button[type=submit]").prop("disabled",!0),
-  $.ajax({
-    context:this,
-    type:"POST",
-    url:main_url+"login",
-    data:$(this).serialize(),
-    dataType:"json"
-  }).done(function(e){
-    e.success?location.href="./":alert(e.error)
-  }).always(function(){
-    $(this).find("input").prop("readonly",!1),
-    $(this).find("button[type=submit]").prop("disabled",!1)
-  })
-}),
-$("form[name=frmChangePassword]").submit(function(e){
-  if(e.preventDefault(),$(this).find("input[name=new_password]").val()!=$(this).find("input[name=v_new_password]").val())
-    return alert("The new password confirmation doesn't match");
-  $(this).find("button").prop("disabled",!0),
-  $.ajax({
-    context:this,
-    type:"POST",
-    url:api_url+"user/changepassword",
-    data:$(this).serialize(),
-    dataType:"json"
-  }).done(function(e){
-    e.success?(alert("Password changed successfully!"),$(this).trigger("reset"),$("#changePasswordModal").modal("close")):alert(e.error)
-  }).always(function(){
-    $(this).find("button").prop("disabled",!1)
-  })
-});
+  $("form[name=frmChangePassword]").submit(function(e){
+    if(e.preventDefault(),$(this).find("input[name=new_password]").val()!=$(this).find("input[name=v_new_password]").val())
+      return alert("The new password confirmation doesn't match");
+    $(this).find("button").prop("disabled",!0),
+    $.ajax({
+      context:this,
+      type:"POST",
+      url:api_url+"user/changepassword",
+      data:$(this).serialize(),
+      dataType:"json"
+    }).done(function(e){
+      e.success?(alert("Password changed successfully!"),$(this).trigger("reset"),$("#changePasswordModal").modal("close")):alert(e.error)
+    }).always(function(){
+      $(this).find("button").prop("disabled",!1)
+    })
+  });

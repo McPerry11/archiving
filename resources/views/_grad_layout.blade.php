@@ -9,6 +9,7 @@
 	@yield('styles')
 </head>
 <body>
+	@include('navbar')
 	@yield('body')
 </body>
 @include('_scripts')
