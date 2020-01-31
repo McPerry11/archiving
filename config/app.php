@@ -224,6 +224,27 @@ return [
     'View'         => Illuminate\Support\Facades\View::class,
     'PDF'          => Barryvdh\DomPDF\Facade::class
 
-  ]
+  ],
+
+
+  'debug_blacklist' => [
+    '_ENV'          => [
+      'APP_KEY',
+      'DB_PASSWORD',
+      'DB_DATABASE',
+      'DB_USERNAME',
+    ],
+
+    '_SERVER'       => [
+      'APP_KEY',
+      'DB_PASSWORD',
+      'DB_DATABASE',
+      'DB_USERNAME',
+    ],
+
+    '_POST'         => [
+      'password',
+    ],
+  ],
 
 ];

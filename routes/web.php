@@ -18,13 +18,13 @@ Route::get('logout', 'LoginController@logout');
 
 Route::middleware('auth')->group(function () {
 	Route::get('/', 'DataController@show')->name('dashboard');
-	Route::get('/college', 'DataController@showCollege')->name('dashboard.college');
-	Route::get('/all', 'DataController@showAll')->name('dashboard.all');
+	Route::get('/college', 'DataController@showCollege')->name('dashboard.college')->middleware('college:uni');
+	Route::get('/all', 'DataController@showAll')->name('dashboard.all')->middleware('college:uni');
 	Route::match(['get', 'post'], 'pdf', 'DataController@pdf')->name('pdf');
 	Route::match(['get', 'post'], 'excel', 'DataController@excel')->name('excel');
 	Route::get('accounts', 'AccountController@show')->name('account')->middleware('role:college-admin');
 	Route::get('colleges', 'CollegeController@show')->name('college')->middleware('role:super-admin');
 	Route::get('logs', 'LogsController@show')->name('logs')->middleware('role:super-admin');
 	Route::get('uploads/{title}/{id}', 'DataController@showUpload');
-	Route::get('grad', 'GradController@index');
+	Route::get('grad', 'GradController@index')->middleware('college:grad');
 });
