@@ -17,8 +17,8 @@ class DataExport implements FromView, ShouldAutoSize {
 
   public function view(): View {
     return view('excel', [
-      'data' => $this->data
-      'timestamp' => Carbon::now('+8:00');
+      'data' => $this->data,
+      'timestamp' => Carbon::now('+8:00'),
     ]);
   }
 }

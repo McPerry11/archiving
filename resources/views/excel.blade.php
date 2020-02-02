@@ -1,6 +1,10 @@
 <table>
   <thead>
     <tr>
+      <th colspan="12">UE Research Archiving System</th>
+    </tr>
+    <tr><th colspan="12"></th></tr>
+    <tr>
       <th>ID</th>
       <th>Title</th>
       <th>Authors</th>
@@ -32,13 +36,13 @@
       <td>{{ $row->url }}</td>
     </tr>
     @endforeach
-    <tr></tr>
-    <tr></tr>
+    <tr><td colspan="12"></td></tr>
+    <tr><td colspan="12"></td></tr>
     <tr>
-      <td>Retrieved from UE CCSS Archiving System</td>
+      <td colspan="12">Retrieved from UE CCSS Archiving System</td>
     </tr>
     <tr>
-      <td>{{ $timestamp }}</td>
+      <td colspan="12">{{ $timestamp }}</td>
     </tr>
   </tbody>
 </table>
