@@ -19,7 +19,9 @@ class DataController extends Controller {
    * @param Request $request
    */
   protected function show(Request $request) {
-    if (Auth::user()->isSuperAdmin) {
+    if (Auth::user()->college_id == 7) {
+      return redirect('grad');
+    } else if (Auth::user()->isSuperAdmin) {
       return redirect()->route('dashboard.all');
     } else if (Auth::user()->isAdmin || Auth::user()->isGuest) {
       return redirect()->route('dashboard.college');
