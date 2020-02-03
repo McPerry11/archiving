@@ -78,7 +78,7 @@ class DataController extends Controller {
     $data = new Data;
 
     if (!Auth::user()->isAdmin) {
-      $request->authors = join(array_merge([Auth::user()->searchName], explode(';', $request->authors))); 
+      $request->authors = join(";", array(Auth::user()->searchName, $request->authors)); 
     }
 
     if (Data::where('title', $request->title)->whereNull('deleted_at')->count() > 0) {

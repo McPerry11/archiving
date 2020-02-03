@@ -265,6 +265,7 @@ $("form[name=frmAdd]").submit(function(e){
   $(this).find("input").prop("readonly",!0),
   $(this).find("button").prop("disabled",!0);
   var i=new FormData($(this)[0]);
+  console.log(t);
   i.append("authors",t.join(";")),
   i.append("keywords",a.join(";")),
   i.append("category",n.join(";")),
