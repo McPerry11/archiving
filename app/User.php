@@ -85,6 +85,13 @@ class User extends Authenticatable {
 
     $name[] = $this->last_name;
 
+    $name = $this->last_name . ', ' . $this->first_name;
+
+    if ($this->middle_initial) {
+      $name = $name . ' ' . $this->middle_initial;
+    }
+
+    return $name;
     return join(' ', $name);
   }
 

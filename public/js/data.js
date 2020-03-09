@@ -98,6 +98,8 @@ function viewData(e){
       t.find("input[name=presentation_date]").val(a.presentation_date),
       t.find("input[name=publication_date]").val(a.publication_date),
       t.find("input[name=note]").val(a.note),
+      t.find("input[name=conference_name]").val(a.conference_name),
+      t.find("input[name=url]").val(a.url),
       t.find("select[name=college]").val(a.college_id).formSelect(),
       old_attachment_list=a.attachments.map(function(e){
         return _extends({},e,{title:a.title})
@@ -148,6 +150,8 @@ function editData(e){
       t.find("input[name=presentation_date]").val(a.presentation_date),
       t.find("input[name=publication_date]").val(a.publication_date),
       t.find("input[name=note]").val(a.note),
+      t.find("input[name=conference_name]").val(a.conference_name),
+      t.find("input[name=url]").val(a.url),
       t.find("select[name=college]").val(a.college_id).formSelect(),
       old_attachment_list=a.attachments.map(function(e){
         return _extends({},e,{title:a.title})
