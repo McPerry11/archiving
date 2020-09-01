@@ -107,7 +107,7 @@ class DataController extends Controller {
         if (count($request->attachments) > 0) {
           foreach ($request->attachments as $file) {
            $filename = str_replace('.' . $file->getClientOriginalExtension(), '', $file->getClientOriginalName()) . '-' . time() . '.' . $file->getClientOriginalExtension();
-           $file->move(public_path('uploads'), $filename);
+           $file->move(asset('uploads'), $filename);
 
            $attachment = new Attachment;
            $attachment->data()->associate($data);
@@ -152,7 +152,7 @@ class DataController extends Controller {
         if ($request->attachments && count($request->attachments) > 0) {
           foreach ($request->attachments as $id => $file) {
             $filename = str_replace('.' . $file->getClientOriginalExtension(), '', $file->getClientOriginalName()) . '-' . (time() + $id) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads'), $filename);
+            $file->move(asset('uploads'), $filename);
 
             $attachment = new Attachment;
             $attachment->data()->associate($data);
