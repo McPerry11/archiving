@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('extra-scripts')
-<script src="{{ asset('js/data.js') }}?v={{ filemtime(public_path('js/data.js')) }}"></script>
+<script src="{{ asset('js/data.js') }}"></script>
 @endsection
 
 @section('body')
