@@ -11,8 +11,8 @@
 </head>
 <body class="{{ isset($login) ? "login" : "" }}" style="{{ Auth::check() && !Auth::user()->isSuperAdmin ? "background-image: url(".asset('img/' . Auth::user()->college->background).")" : "" }}">
   @yield("body")
-  <script src="{{ asset('js/packages.js') }}?v={{ filemtime(asset('js/packages.js')) }}"></script>
-  <script src="{{ asset('js/app.js') }}?v={{ filemtime(asset('js/app.js')) }}"></script>
+  <script src="{{ asset('js/packages.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   @yield("extra-scripts")
 </body>
 </html>
